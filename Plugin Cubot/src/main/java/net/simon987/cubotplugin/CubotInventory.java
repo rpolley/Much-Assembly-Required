@@ -1,6 +1,7 @@
 package net.simon987.cubotplugin;
 
 import net.simon987.server.GameServer;
+import net.simon987.server.ServerConfiguration;
 import net.simon987.server.assembly.HardwareModule;
 import net.simon987.server.assembly.Status;
 import net.simon987.server.game.item.Item;
@@ -24,7 +25,7 @@ public class CubotInventory extends HardwareModule {
     private static final int INV_SEEK = 2;
     private static final int INV_SCAN = 3;
 
-    private int inventorySize = 4; //TODO: load from config
+    private int inventorySize;
     private Map<Integer, Item> inventory;
     private int position = 0;
 
@@ -32,12 +33,18 @@ public class CubotInventory extends HardwareModule {
     public CubotInventory(ControllableUnit unit) {
         super(null, unit);
 
+        ServerConfiguration pluginConfig = new ServerConfiguration("config.properties");
+        inventorySize = pluginConfig.getInt("inventorySize");
+        
         inventory = new HashMap<>();
     }
 
     public CubotInventory(Document document, ControllableUnit cubot) {
         super(document, cubot);
 
+        ServerConfiguration pluginConfig = new ServerConfiguration("config.properties");
+        inventorySize = pluginConfig.getInt("inventorySize");
+        
         position = document.getInteger("position");
         inventorySize = document.getInteger("size");
 
