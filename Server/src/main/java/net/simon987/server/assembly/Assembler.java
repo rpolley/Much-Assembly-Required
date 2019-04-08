@@ -126,7 +126,16 @@ public class Assembler {
     private static boolean isLineEmpty(String line) {
         return line.replaceAll("\\s+", "").isEmpty();
     }
-
+    /**
+     * Parse the DW instruction (Define word). Handles DUP operator
+     *
+     * @param line        Current line. assuming that comments and labels are removed
+     * @param currentLine Current line number
+     * @return Encoded instruction, null if the line is not a DW instruction
+     */
+    private static byte[] parseDWInstruction(String line, int currentLine) throws AssemblyException {
+        return parseDWInstruction(line, null, currentLine);
+    }
     /**
      * Parse the DW instruction (Define word). Handles DUP operator
      *
@@ -269,17 +278,6 @@ public class Assembler {
 
         return out.toByteArray();
 
-    }
-
-    /**
-     * Parse the DW instruction (Define word). Handles DUP operator
-     *
-     * @param line        Current line. assuming that comments and labels are removed
-     * @param currentLine Current line number
-     * @return Encoded instruction, null if the line is not a DW instruction
-     */
-    private static byte[] parseDWInstruction(String line, int currentLine) throws AssemblyException {
-        return parseDWInstruction(line, null, currentLine);
     }
 
     /**

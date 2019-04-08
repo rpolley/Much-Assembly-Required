@@ -104,19 +104,8 @@ public class DefaultInstructionSet implements InstructionSet {
             return defaultInstruction;
         }
     }
-
-    /**
-     * Add a new instruction to the instructionSet
-     *
-     * @param opcode      opcode of the instruction
-     * @param instruction Instruction to add
-     */
-    public void addInstruction(int opcode, Instruction instruction) {
-        instructionMap.put(opcode, instruction);
-    }
-
-
-    @Override
+    
+     @Override
     public Instruction get(String mnemonic) {
         for (Instruction ins : instructionMap.values()) {
             if (ins.getMnemonic().equalsIgnoreCase(mnemonic)) {
@@ -132,6 +121,15 @@ public class DefaultInstructionSet implements InstructionSet {
         return null;
     }
 
+    /**
+     * Add a new instruction to the instructionSet
+     *
+     * @param opcode      opcode of the instruction
+     * @param instruction Instruction to add
+     */
+    public void addInstruction(int opcode, Instruction instruction) {
+        instructionMap.put(opcode, instruction);
+    }
 
     @Override
     public void add(Instruction instruction) {
